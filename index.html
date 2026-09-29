@@ -13,8 +13,21 @@
   --paragraph-color:#ffffff;
 }
 
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html{
+  width:100%;
+  overflow-x:hidden;
+}
+
 body{
   margin:0;
+  width:100%;
+  min-height:100vh;
   font-family:'Segoe UI',sans-serif;
   color:var(--text-color);
   overflow-x:hidden;
@@ -29,65 +42,116 @@ body::before{
   z-index:-1;
 }
 
-/* TEMAS */
+/* =========================
+   TEMAS
+========================= */
 body.dark{
   background:url('fondos/FONDO1.jpg') center/cover fixed;
   --module-bg:rgba(0,0,0,.45);
   --title-color:#8e4754;
 }
+
 body.light{
   background:url('fondos/FONDO2.jpg') center/cover fixed;
   --module-bg:rgba(204,169,63,.34);
   --title-color:#87302a;
 }
+
 body.romantic{
   background:url('fondos/FONDO3.jpg') center/cover fixed;
   --module-bg:rgba(255,192,203,.25);
   --title-color:#ff9ebc;
 }
 
-/* SELECTOR */
+/* =========================
+   SELECTOR DE TEMA
+========================= */
 .theme-picker{
   position:fixed;
-  top:20px;right:20px;
-  display:flex;gap:10px;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:10px;
   z-index:1000;
 }
+
 .theme-picker button{
   padding:10px 14px;
   border:none;
   border-radius:50%;
   background:rgba(255,255,255,.25);
   backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   color:#fff;
   cursor:pointer;
   font-size:18px;
 }
 
-section{padding:80px 20px;}
+/* =========================
+   ESTRUCTURA GENERAL
+========================= */
+section{
+  padding:80px 20px;
+}
 
 .box{
-  max-width:1100px;
+  width:min(1100px,100%);
   margin:auto;
   background:var(--module-bg);
   padding:50px;
   border-radius:25px;
   backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   box-shadow:0 25px 50px rgba(0,0,0,.35);
 }
 
-h1,h2{text-align:center;color:var(--title-color);}
-h1{font-size:3em;}
-h2{font-size:2.2em;}
-p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color);}
+h1,
+h2{
+  text-align:center;
+  color:var(--title-color);
+  overflow-wrap:anywhere;
+}
+
+h1{
+  font-size:clamp(2.2rem,5vw,3rem);
+}
+
+h2{
+  font-size:clamp(1.6rem,4vw,2.2rem);
+}
+
+p{
+  text-align:center;
+  font-size:1.2em;
+  line-height:1.8;
+  color:var(--paragraph-color);
+}
 
 .divider{
-  width:120px;height:4px;
+  width:120px;
+  height:4px;
   margin:30px auto;
   background:linear-gradient(to right,transparent,#ffcad4,transparent);
 }
 
-/* ===== GALERÍA COLLAGE ===== */
+/* =========================
+   FECHA DE ANIVERSARIO
+========================= */
+.anniversary-year{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.anniversary-year span{
+  font-size:.8em;
+}
+
+/* =========================
+   GALERÍA COLLAGE
+========================= */
 .gallery{
   column-count:3;
   column-gap:20px;
@@ -97,9 +161,10 @@ p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color)
 .gallery video{
   display:block;
   max-width:100%;
-  width:auto;
+  width:100%;
   height:auto;
   max-height:420px;
+  object-fit:cover;
   margin:0 auto 20px;
   border-radius:15px;
   break-inside:avoid;
@@ -107,7 +172,9 @@ p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color)
   transition:transform .3s ease, box-shadow .3s ease;
 }
 
-.gallery video{max-height:320px;}
+.gallery video{
+  max-height:320px;
+}
 
 .gallery img.featured{
   max-height:600px;
@@ -120,12 +187,11 @@ p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color)
   box-shadow:0 18px 40px rgba(0,0,0,.45);
 }
 
-@media(max-width:900px){.gallery{column-count:2;}}
-@media(max-width:500px){.gallery{column-count:1;}}
-
-/* ===== COLLAGE FINAL ===== */
+/* =========================
+   COLLAGE FINAL
+========================= */
 .collage-final-layout{
-  max-width:900px;             
+  max-width:900px;
   margin:0 auto;
   display:grid;
   grid-template-columns:1fr 1.2fr;
@@ -141,6 +207,7 @@ p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color)
   border-radius:20px;
   justify-self:center;
   box-shadow:0 20px 40px rgba(0,0,0,.35);
+  cursor:pointer;
 }
 
 .collage-final-layout p{
@@ -148,32 +215,18 @@ p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color)
   font-size:1.25em;
   line-height:1.8;
   margin:0;
+  white-space:pre-line;
 }
 
-@media(max-width:768px){
-  .collage-final-layout{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-  .collage-final-layout p{
-    text-align:center;
-    margin-top:20px;
-  }
-}
-
-iframe{
-  width:100%;
-  height:400px;
-  border-radius:20px;
-}
-
-
-/* ===== CONTADOR DE ANIVERSARIO ===== */
+/* =========================
+   CONTADOR DE ANIVERSARIO
+========================= */
 .countdown-wrap{
   max-width:820px;
   margin:0 auto;
   text-align:center;
 }
+
 .countdown-kicker{
   display:inline-flex;
   align-items:center;
@@ -185,24 +238,31 @@ iframe{
   font-size:.95rem;
   letter-spacing:.04em;
 }
+
 .countdown-date{
   margin:18px 0 8px;
   font-size:clamp(1.1rem,2vw,1.35rem);
   opacity:.92;
 }
+
 .countdown-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(100px,1fr));
   gap:16px;
   margin:30px auto 20px;
 }
+
 .countdown-card{
+  min-width:0;
   padding:24px 12px 20px;
   border-radius:22px;
   background:rgba(255,255,255,.10);
   border:1px solid rgba(255,255,255,.14);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 12px 30px rgba(0,0,0,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 12px 30px rgba(0,0,0,.18);
 }
+
 .countdown-number{
   display:block;
   font-size:clamp(2.2rem,6vw,4.4rem);
@@ -211,6 +271,7 @@ iframe{
   color:#ffd8e2;
   font-variant-numeric:tabular-nums;
 }
+
 .countdown-label{
   display:block;
   margin-top:10px;
@@ -219,12 +280,14 @@ iframe{
   letter-spacing:.12em;
   opacity:.8;
 }
+
 .anniversary-message{
   max-width:720px;
   margin:24px auto 0;
   font-size:1.15rem;
   line-height:1.8;
 }
+
 .anniversary-badge{
   display:none;
   margin:24px auto 0;
@@ -232,19 +295,18 @@ iframe{
   max-width:100%;
   padding:14px 22px;
   border-radius:999px;
-  background:linear-gradient(135deg,rgba(255,117,140,.9),rgba(255,126,179,.9));
+  background:linear-gradient(
+    135deg,
+    rgba(255,117,140,.9),
+    rgba(255,126,179,.9)
+  );
   box-shadow:0 14px 34px rgba(255,117,140,.28);
   font-weight:700;
 }
-@media(max-width:650px){
-  section{padding:55px 14px;}
-  .box{padding:32px 20px;}
-  h1{font-size:2.35em;}
-  h2{font-size:1.8em;}
-  .countdown-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
-}
 
-/* LIGHTBOX */
+/* =========================
+   LIGHTBOX
+========================= */
 .lightbox{
   position:fixed;
   inset:0;
@@ -253,15 +315,21 @@ iframe{
   align-items:center;
   justify-content:center;
   z-index:999;
+  padding:20px;
 }
+
 .lightbox img,
 .lightbox video{
   max-width:90vw;
   max-height:90vh;
+  width:auto;
+  height:auto;
   border-radius:20px;
 }
 
-/* CORAZONES */
+/* =========================
+   CORAZONES
+========================= */
 .heart{
   position:fixed;
   top:-10px;
@@ -269,13 +337,22 @@ iframe{
   font-size:20px;
   animation:fall linear infinite;
   z-index:0;
+  pointer-events:none;
 }
-@keyframes fall{to{transform:translateY(110vh)}}
 
-/* MUSICA */
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+  }
+}
+
+/* =========================
+   MÚSICA
+========================= */
 .music-btn{
   position:fixed;
-  bottom:30px;right:30px;
+  bottom:30px;
+  right:30px;
   padding:15px 25px;
   border:none;
   border-radius:40px;
@@ -284,9 +361,11 @@ iframe{
   cursor:pointer;
   z-index:1000;
 }
+
 .playlist{
   position:fixed;
-  bottom:90px;right:30px;
+  bottom:90px;
+  right:30px;
   width:260px;
   background:rgba(0,0,0,.85);
   border-radius:20px;
@@ -294,9 +373,24 @@ iframe{
   display:none;
   z-index:999;
 }
-.playlist h3{text-align:center;color:#ffcad4;}
-#songTitle{text-align:center;font-size:.9em;opacity:.8}
-.controls{display:flex;justify-content:space-around;margin:10px 0}
+
+.playlist h3{
+  text-align:center;
+  color:#ffcad4;
+}
+
+#songTitle{
+  text-align:center;
+  font-size:.9em;
+  opacity:.8;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-around;
+  margin:10px 0;
+}
+
 .controls button{
   border:none;
   border-radius:50%;
@@ -305,53 +399,377 @@ iframe{
   background:linear-gradient(to right,#ff758c,#ff7eb3);
   color:#fff;
 }
-.playlist ul{list-style:none;padding:0;margin:0}
-.playlist li{padding:8px;border-radius:10px;cursor:pointer}
-.playlist li:hover{background:rgba(255,255,255,.15)}
 
-footer{text-align:center;padding:40px;opacity:.85;}
+.playlist ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.playlist li{
+  padding:8px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.playlist li:hover{
+  background:rgba(255,255,255,.15);
+}
+
+footer{
+  text-align:center;
+  padding:40px;
+  opacity:.85;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media(max-width:900px){
+  .gallery{
+    column-count:2;
+  }
+
+  .collage-final-layout{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .collage-final-layout p{
+    text-align:center;
+    margin-top:20px;
+  }
+}
+
+/* =========================
+   CELULAR
+========================= */
+@media(max-width:768px){
+
+  body.dark,
+  body.light,
+  body.romantic{
+    background-attachment:scroll;
+  }
+
+  body.dark{
+    background-image:url('fondos/FONDO1.jpg');
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+
+  body.light{
+    background-image:url('fondos/FONDO2.jpg');
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+
+  body.romantic{
+    background-image:url('fondos/FONDO3.jpg');
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+
+  section{
+    padding:45px 12px;
+  }
+
+  .box{
+    width:100%;
+    max-width:100%;
+    padding:30px 18px;
+    border-radius:20px;
+    overflow:hidden;
+  }
+
+  h1{
+    font-size:clamp(2rem,10vw,2.7rem);
+    line-height:1.12;
+    margin:10px 0 20px;
+  }
+
+  h2{
+    font-size:clamp(1.35rem,7vw,1.9rem);
+    line-height:1.3;
+    margin:12px 0;
+  }
+
+  p{
+    font-size:1rem;
+    line-height:1.65;
+    overflow-wrap:break-word;
+  }
+
+  .anniversary-year{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .divider{
+    width:90px;
+    margin:22px auto;
+  }
+
+  .theme-picker{
+    top:12px;
+    right:12px;
+    gap:6px;
+  }
+
+  .theme-picker button{
+    width:40px;
+    height:40px;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+  }
+
+  .gallery{
+    column-count:2;
+    column-gap:10px;
+  }
+
+  .gallery img,
+  .gallery video{
+    width:100%;
+    max-width:100%;
+    max-height:none;
+    margin-bottom:10px;
+    border-radius:12px;
+  }
+
+  .gallery img.featured{
+    max-height:none;
+  }
+
+  .gallery img:hover,
+  .gallery video:hover{
+    transform:none;
+  }
+
+  .countdown-wrap{
+    width:100%;
+  }
+
+  .countdown-kicker{
+    font-size:.8rem;
+    padding:7px 11px;
+  }
+
+  .countdown-date{
+    font-size:.95rem;
+    line-height:1.5;
+  }
+
+  .countdown-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin:22px 0 15px;
+    width:100%;
+  }
+
+  .countdown-card{
+    padding:20px 8px 17px;
+    border-radius:16px;
+  }
+
+  .countdown-number{
+    font-size:clamp(2rem,13vw,3.2rem);
+  }
+
+  .countdown-label{
+    font-size:.67rem;
+    letter-spacing:.07em;
+  }
+
+  .anniversary-message{
+    font-size:1rem;
+    line-height:1.6;
+  }
+
+  .anniversary-badge{
+    width:100%;
+    border-radius:18px;
+    font-size:.9rem;
+    padding:13px 15px;
+  }
+
+  .collage-final-layout{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+    width:100%;
+  }
+
+  .collage-final{
+    width:100%;
+    max-width:300px;
+  }
+
+  .collage-final-layout p{
+    width:100%;
+    text-align:center;
+    font-size:1rem;
+    line-height:1.7;
+    white-space:pre-line;
+  }
+
+  .lightbox{
+    padding:15px;
+  }
+
+  .lightbox img,
+  .lightbox video{
+    max-width:95vw;
+    max-height:85vh;
+  }
+
+  .music-btn{
+    right:12px;
+    bottom:15px;
+    padding:12px 17px;
+    font-size:.85rem;
+  }
+
+  .playlist{
+    left:12px;
+    right:12px;
+    bottom:72px;
+    width:auto;
+    max-width:none;
+    padding:14px;
+    border-radius:18px;
+  }
+
+  .playlist h3{
+    margin:5px 0 10px;
+  }
+
+  .playlist li{
+    padding:9px;
+    font-size:.9rem;
+  }
+
+  footer{
+    padding:35px 20px 90px;
+    font-size:.9rem;
+  }
+}
+
+/* =========================
+   CELULARES PEQUEÑOS
+========================= */
+@media(max-width:430px){
+
+  section{
+    padding:38px 10px;
+  }
+
+  .box{
+    padding:26px 15px;
+    border-radius:17px;
+  }
+
+  .gallery{
+    column-count:1;
+  }
+
+  h1{
+    font-size:2rem;
+  }
+
+  h2{
+    font-size:1.45rem;
+  }
+
+  p{
+    font-size:.96rem;
+  }
+
+  .countdown-card{
+    padding:18px 5px 15px;
+  }
+
+  .countdown-number{
+    font-size:2.5rem;
+  }
+
+  .theme-picker button{
+    width:37px;
+    height:37px;
+  }
+}
 </style>
 </head>
 
 <body class="dark">
 
 <div class="theme-picker">
-  <button onclick="setTheme('dark')">🌙</button>
-  <button onclick="setTheme('light')">☀️</button>
-  <button onclick="setTheme('romantic')">💖</button>
+  <button onclick="setTheme('dark')" aria-label="Tema oscuro">🌙</button>
+  <button onclick="setTheme('light')" aria-label="Tema claro">☀️</button>
+  <button onclick="setTheme('romantic')" aria-label="Tema romántico">💖</button>
 </div>
 
 <section>
   <div class="box">
     <h1>Un Año de Nosotros ❤️</h1>
-    <h2>29 de septiembre de 2025 → 29 de septiembre de 2026</h2>
+
+    <h2 class="anniversary-year">
+      29 · 09 · 2025
+      <span>❤️</span>
+      29 · 09 · 2026
+    </h2>
+
     <div class="divider"></div>
-    <p>Hace un año comenzó una historia que, sin darse cuenta, se fue llenando de mensajes, risas, recuerdos y momentos que hoy significan muchísimo. Esta página guarda un pedacito de todo eso: de lo que han vivido, de lo que sienten y de todo lo bonito que todavía les falta por compartir.</p>
-    <p>Que este primer año sea apenas el comienzo de muchos más. Que nunca les falten motivos para elegirse, paciencia para cuidarse y ganas de seguir creando recuerdos juntos. 💖</p>
+
+    <p>
+      Hace un año comenzó una historia que, sin darse cuenta, se fue llenando de mensajes,
+      risas, recuerdos y momentos que hoy significan muchísimo. Esta página guarda un
+      pedacito de todo eso: de lo que han vivido, de lo que sienten y de todo lo bonito
+      que todavía les falta por compartir.
+    </p>
+
+    <p>
+      Que este primer año sea apenas el comienzo de muchos más. Que nunca les falten
+      motivos para elegirse, paciencia para cuidarse y ganas de seguir creando recuerdos juntos. 💖
+    </p>
   </div>
 </section>
 
 <section>
   <div class="box">
     <h2>Nuestra Historia en Recuerdos 📸</h2>
-    <p>Cada foto guarda algo que quizá en el momento parecía pequeño, pero que con el tiempo se volvió especial: una sonrisa, una conversación, un día bonito o simplemente la suerte de coincidir. Este collage es una forma de mirar atrás y recordar todo lo que construyeron durante este primer año.</p>
+
+    <p>
+      Cada foto guarda algo que quizá en el momento parecía pequeño, pero que con el tiempo
+      se volvió especial: una sonrisa, una conversación, un día bonito o simplemente la
+      suerte de coincidir. Este collage es una forma de mirar atrás y recordar todo lo que
+      construyeron durante este primer año.
+    </p>
+
     <div class="divider"></div>
+
     <div class="gallery">
-      <img src="fotos/foto1.jpeg" class="featured" onclick="openLightbox(this.src)">
-      <img src="fotos/foto2.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto3.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto4.jpeg" class="featured" onclick="openLightbox(this.src)">
-      <img src="fotos/foto5.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto6.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto7.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto8.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto9.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto10.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto11.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto12.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto13.jpeg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto14.jpg" onclick="openLightbox(this.src)">
-      <img src="fotos/foto15.jpg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto1.jpeg" class="featured" alt="Recuerdo 1" onclick="openLightbox(this.src)">
+      <img src="fotos/foto2.jpeg" alt="Recuerdo 2" onclick="openLightbox(this.src)">
+      <img src="fotos/foto3.jpeg" alt="Recuerdo 3" onclick="openLightbox(this.src)">
+      <img src="fotos/foto4.jpeg" class="featured" alt="Recuerdo 4" onclick="openLightbox(this.src)">
+      <img src="fotos/foto5.jpeg" alt="Recuerdo 5" onclick="openLightbox(this.src)">
+      <img src="fotos/foto6.jpeg" alt="Recuerdo 6" onclick="openLightbox(this.src)">
+      <img src="fotos/foto7.jpeg" alt="Recuerdo 7" onclick="openLightbox(this.src)">
+      <img src="fotos/foto8.jpeg" alt="Recuerdo 8" onclick="openLightbox(this.src)">
+      <img src="fotos/foto9.jpeg" alt="Recuerdo 9" onclick="openLightbox(this.src)">
+      <img src="fotos/foto10.jpeg" alt="Recuerdo 10" onclick="openLightbox(this.src)">
+      <img src="fotos/foto11.jpeg" alt="Recuerdo 11" onclick="openLightbox(this.src)">
+      <img src="fotos/foto12.jpeg" alt="Recuerdo 12" onclick="openLightbox(this.src)">
+      <img src="fotos/foto13.jpeg" alt="Recuerdo 13" onclick="openLightbox(this.src)">
+      <img src="fotos/foto14.jpg" alt="Recuerdo 14" onclick="openLightbox(this.src)">
+      <img src="fotos/foto15.jpg" alt="Recuerdo 15" onclick="openLightbox(this.src)">
     </div>
   </div>
 </section>
@@ -359,18 +777,48 @@ footer{text-align:center;padding:40px;opacity:.85;}
 <section id="aniversario">
   <div class="box">
     <div class="countdown-wrap">
+
       <span class="countdown-kicker">💞 Nuestro primer aniversario</span>
+
       <h2 id="countdownTitle">Falta muy poquito para nuestro día</h2>
-      <p class="countdown-date">29 de septiembre de 2026 · 12:00 a. m.</p>
+
+      <p class="countdown-date">
+        29 de septiembre de 2026 · 12:00 a. m.
+      </p>
+
       <div class="divider"></div>
+
       <div class="countdown-grid" id="countdownGrid">
-        <div class="countdown-card"><span class="countdown-number" id="days">00</span><span class="countdown-label">Días</span></div>
-        <div class="countdown-card"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Horas</span></div>
-        <div class="countdown-card"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutos</span></div>
-        <div class="countdown-card"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Segundos</span></div>
+        <div class="countdown-card">
+          <span class="countdown-number" id="days">00</span>
+          <span class="countdown-label">Días</span>
+        </div>
+
+        <div class="countdown-card">
+          <span class="countdown-number" id="hours">00</span>
+          <span class="countdown-label">Horas</span>
+        </div>
+
+        <div class="countdown-card">
+          <span class="countdown-number" id="minutes">00</span>
+          <span class="countdown-label">Minutos</span>
+        </div>
+
+        <div class="countdown-card">
+          <span class="countdown-number" id="seconds">00</span>
+          <span class="countdown-label">Segundos</span>
+        </div>
       </div>
-      <div class="anniversary-badge" id="anniversaryBadge">🎉 ¡Feliz primer aniversario! 365 días eligiéndose ❤️</div>
-      <p class="anniversary-message" id="anniversaryText">No se trata solo de contar los días, sino de recordar todo lo que cabe dentro de ellos. Cada minuto que falta los acerca a celebrar un año de una historia que merece seguir creciendo.</p>
+
+      <div class="anniversary-badge" id="anniversaryBadge">
+        🎉 ¡Feliz primer aniversario! 365 días eligiéndose ❤️
+      </div>
+
+      <p class="anniversary-message" id="anniversaryText">
+        No se trata solo de contar los días, sino de recordar todo lo que cabe dentro de ellos.
+        Cada minuto que falta los acerca a celebrar un año de una historia que merece seguir creciendo.
+      </p>
+
     </div>
   </div>
 </section>
@@ -378,9 +826,17 @@ footer{text-align:center;padding:40px;opacity:.85;}
 <section>
   <div class="box">
     <h2>Lo Bonito de Elegirse ✨</h2>
+
     <div class="divider"></div>
+
     <div class="collage-final-layout">
-      <img src="fotos/foto16.png" class="collage-final" onclick="openLightbox(this.src)">
+      <img
+        src="fotos/foto16.png"
+        class="collage-final"
+        alt="Collage especial de aniversario"
+        onclick="openLightbox(this.src)"
+      >
+
       <p>Hay personas que llegan a la vida y, poco a poco, se convierten en hogar. Tú eres una de esas personas. Tu sonrisa, tu forma de ser, tus detalles y hasta esas pequeñas cosas que quizá tú no notas hacen que compartir este camino contigo sea especial.
 
 Este primer año no solo se mide en días. Se mide en conversaciones que hicieron más liviano un momento difícil, en risas inesperadas, en planes, en recuerdos y en la tranquilidad de saber que, incluso con distancia o días complicados, siguen encontrando la manera de estar el uno para el otro.
@@ -392,137 +848,241 @@ Feliz primer año. Que sigan sumando días, pero sobre todo, razones bonitas par
   </div>
 </section>
 
-<footer>Un año de recuerdos, y toda una historia por delante. 💖</footer>
+<footer>
+  Un año de recuerdos, y toda una historia por delante. 💖
+</footer>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <div id="lightbox-content"></div>
 </div>
 
 <audio id="music"></audio>
-<button class="music-btn" onclick="togglePlaylist()">🎵 Música</button>
+
+<button class="music-btn" onclick="togglePlaylist()">
+  🎵 Música
+</button>
 
 <div class="playlist" id="playlist">
   <h3>Nuestra Playlist</h3>
-  <p id="songTitle">Selecciona una canción</p>
+
+  <p id="songTitle">
+    Selecciona una canción
+  </p>
+
   <div class="controls">
-    <button onclick="prevSong()">⏮</button>
-    <button onclick="togglePlay()" id="playBtn">▶</button>
-    <button onclick="nextSong()">⏭</button>
+    <button onclick="prevSong()" aria-label="Canción anterior">⏮</button>
+    <button onclick="togglePlay()" id="playBtn" aria-label="Reproducir o pausar">▶</button>
+    <button onclick="nextSong()" aria-label="Canción siguiente">⏭</button>
   </div>
+
   <ul>
-    <li onclick="selectSong(0)">❤️ congratulations</li>
+    <li onclick="selectSong(0)">❤️ Congratulations</li>
     <li onclick="selectSong(1)">✨ Reina Pepiada</li>
-    <li onclick="selectSong(2)">🌹Te Quiero Amor</li>
+    <li onclick="selectSong(2)">🌹 Te Quiero Amor</li>
     <li onclick="selectSong(3)">👑 True Love</li>
   </ul>
 </div>
 
 <script>
-setInterval(()=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.innerHTML='❤';
-  h.style.left=Math.random()*100+'vw';
-  h.style.animationDuration=(3+Math.random()*5)+'s';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-},600);
+/* =========================
+   CORAZONES
+========================= */
+setInterval(() => {
+  const h = document.createElement('div');
 
+  h.className = 'heart';
+  h.innerHTML = '❤';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.animationDuration = (3 + Math.random() * 5) + 's';
+
+  document.body.appendChild(h);
+
+  setTimeout(() => h.remove(), 8000);
+}, 600);
+
+
+/* =========================
+   LIGHTBOX
+========================= */
 function openLightbox(el){
-  const box=document.getElementById('lightbox');
-  const content=document.getElementById('lightbox-content');
-  content.innerHTML='';
-  if(typeof el==='string'){
-    const img=document.createElement('img');
-    img.src=el;
+  const box = document.getElementById('lightbox');
+  const content = document.getElementById('lightbox-content');
+
+  content.innerHTML = '';
+
+  if(typeof el === 'string'){
+    const img = document.createElement('img');
+
+    img.src = el;
     content.appendChild(img);
   }else{
-    const v=document.createElement('video');
-    v.src=el.src;
-    v.controls=true;
-    v.autoplay=true;
+    const v = document.createElement('video');
+
+    v.src = el.src;
+    v.controls = true;
+    v.autoplay = true;
+
     content.appendChild(v);
   }
-  box.style.display='flex';
+
+  box.style.display = 'flex';
 }
+
 function closeLightbox(){
-  document.getElementById('lightbox').style.display='none';
-  document.getElementById('lightbox-content').innerHTML='';
+  document.getElementById('lightbox').style.display = 'none';
+  document.getElementById('lightbox-content').innerHTML = '';
 }
 
-const music=document.getElementById('music');
-const songs=[
- {t:'Congratulations',f:'Music/congratulations.mp3'},
- {t:'Reina Pepiada',f:'Music/Reina_pepiada.mp3'},
- {t:'Te Quiero Amor',f:'Music/tequieroamor.mp3'},
- {t:'True Love',f:'Music/true_love.mp3'}
+
+/* =========================
+   MÚSICA
+========================= */
+const music = document.getElementById('music');
+
+const songs = [
+  {t:'Congratulations', f:'Music/congratulations.mp3'},
+  {t:'Reina Pepiada', f:'Music/Reina_pepiada.mp3'},
+  {t:'Te Quiero Amor', f:'Music/tequieroamor.mp3'},
+  {t:'True Love', f:'Music/true_love.mp3'}
 ];
-let current=0,playing=false;
+
+let current = 0;
+let playing = false;
+
 function togglePlaylist(){
-  const p=document.getElementById('playlist');
-  p.style.display=p.style.display==='block'?'none':'block';
+  const p = document.getElementById('playlist');
+
+  p.style.display = p.style.display === 'block'
+    ? 'none'
+    : 'block';
 }
+
 function selectSong(i){
-  current=i;
-  music.src=songs[i].f;
+  current = i;
+  music.src = songs[i].f;
+
   music.play();
-  playing=true;
-  document.getElementById('songTitle').innerText=songs[i].t;
-  document.getElementById('playBtn').innerText='⏸';
+  playing = true;
+
+  document.getElementById('songTitle').innerText = songs[i].t;
+  document.getElementById('playBtn').innerText = '⏸';
 }
+
 function togglePlay(){
-  if(!music.src)return;
-  playing?music.pause():music.play();
-  playing=!playing;
-  document.getElementById('playBtn').innerText=playing?'⏸':'▶';
+  if(!music.src) return;
+
+  if(playing){
+    music.pause();
+  }else{
+    music.play();
+  }
+
+  playing = !playing;
+
+  document.getElementById('playBtn').innerText = playing
+    ? '⏸'
+    : '▶';
 }
-function nextSong(){current=(current+1)%songs.length;selectSong(current)}
-function prevSong(){current=(current-1+songs.length)%songs.length;selectSong(current)}
-music.onended=nextSong;
+
+function nextSong(){
+  current = (current + 1) % songs.length;
+  selectSong(current);
+}
+
+function prevSong(){
+  current = (current - 1 + songs.length) % songs.length;
+  selectSong(current);
+}
+
+music.onended = nextSong;
 
 
+/* =========================
+   CONTADOR
+========================= */
 const anniversaryDate = new Date('2026-09-29T00:00:00-05:00');
 const relationshipStart = new Date('2025-09-29T00:00:00-05:00');
 
-function pad2(n){ return String(n).padStart(2,'0'); }
+function pad2(n){
+  return String(n).padStart(2,'0');
+}
 
 function updateAnniversaryCountdown(){
   const now = new Date();
   const diff = anniversaryDate - now;
+
   const title = document.getElementById('countdownTitle');
   const badge = document.getElementById('anniversaryBadge');
   const text = document.getElementById('anniversaryText');
+  const labels = document.querySelectorAll('.countdown-label');
 
   if(diff > 0){
     const totalSeconds = Math.floor(diff / 1000);
+
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
+
     document.getElementById('days').textContent = pad2(days);
     document.getElementById('hours').textContent = pad2(hours);
     document.getElementById('minutes').textContent = pad2(minutes);
     document.getElementById('seconds').textContent = pad2(seconds);
+
+    labels[0].textContent = 'Días';
+    labels[1].textContent = 'Horas';
+    labels[2].textContent = 'Minutos';
+    labels[3].textContent = 'Segundos';
+
+    badge.style.display = 'none';
+
     return;
   }
 
   const elapsed = now - relationshipStart;
   const totalDays = Math.floor(elapsed / 86400000);
+
+  const elapsedAfterAnniversary = now - anniversaryDate;
+  const secondsAfterAnniversary = Math.floor(elapsedAfterAnniversary / 1000);
+
+  const hours = Math.floor((secondsAfterAnniversary % 86400) / 3600);
+  const minutes = Math.floor((secondsAfterAnniversary % 3600) / 60);
+  const seconds = secondsAfterAnniversary % 60;
+
   document.getElementById('days').textContent = totalDays;
-  document.getElementById('hours').textContent = pad2(now.getHours());
-  document.getElementById('minutes').textContent = pad2(now.getMinutes());
-  document.getElementById('seconds').textContent = pad2(now.getSeconds());
-  document.querySelectorAll('.countdown-label')[0].textContent = 'Días juntos';
+  document.getElementById('hours').textContent = pad2(hours);
+  document.getElementById('minutes').textContent = pad2(minutes);
+  document.getElementById('seconds').textContent = pad2(seconds);
+
+  labels[0].textContent = 'Días juntos';
+  labels[1].textContent = 'Horas';
+  labels[2].textContent = 'Minutos';
+  labels[3].textContent = 'Segundos';
+
   title.textContent = 'Y ahora… a seguir contando juntos ❤️';
+
   badge.style.display = 'block';
-  text.textContent = 'Ya llegó su día. Hoy no termina el contador: cambia de sentido. Desde aquí empieza a sumar todos los días nuevos que todavía les quedan por vivir, recordar y celebrar juntos.';
+
+  text.textContent =
+    'Ya llegó su día. Hoy no termina el contador: cambia de sentido. Desde aquí empieza a sumar todos los días nuevos que todavía les quedan por vivir, recordar y celebrar juntos.';
 }
 
 updateAnniversaryCountdown();
-setInterval(updateAnniversaryCountdown,1000);
 
-function setTheme(t){document.body.className=t}
+setInterval(
+  updateAnniversaryCountdown,
+  1000
+);
+
+
+/* =========================
+   TEMAS
+========================= */
+function setTheme(t){
+  document.body.className = t;
+}
 </script>
 
 </body>
 </html>
+
