@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Ti, Mi Amor ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --module-bg: rgba(255,255,255,0.15);
+  --text-color:#ffffff;
+  --title-color:#51232c;
+  --paragraph-color:#ffffff;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  color:var(--text-color);
+  overflow-x:hidden;
+  transition:background .6s ease;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  z-index:-1;
+}
+
+/* TEMAS */
+body.dark{
+  background:url('fondos/FONDO1.jpg') center/cover fixed;
+  --module-bg:rgba(0,0,0,.45);
+  --title-color:#8e4754;
+}
+body.light{
+  background:url('fondos/FONDO2.jpg') center/cover fixed;
+  --module-bg:rgba(204,169,63,.34);
+  --title-color:#87302a;
+}
+body.romantic{
+  background:url('fondos/FONDO3.jpg') center/cover fixed;
+  --module-bg:rgba(255,192,203,.25);
+  --title-color:#ff9ebc;
+}
+
+/* SELECTOR */
+.theme-picker{
+  position:fixed;
+  top:20px;right:20px;
+  display:flex;gap:10px;
+  z-index:1000;
+}
+.theme-picker button{
+  padding:10px 14px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(10px);
+  color:#fff;
+  cursor:pointer;
+  font-size:18px;
+}
+
+section{padding:80px 20px;}
+
+.box{
+  max-width:1100px;
+  margin:auto;
+  background:var(--module-bg);
+  padding:50px;
+  border-radius:25px;
+  backdrop-filter:blur(16px);
+  box-shadow:0 25px 50px rgba(0,0,0,.35);
+}
+
+h1,h2{text-align:center;color:var(--title-color);}
+h1{font-size:3em;}
+h2{font-size:2.2em;}
+p{text-align:center;font-size:1.2em;line-height:1.8;color:var(--paragraph-color);}
+
+.divider{
+  width:120px;height:4px;
+  margin:30px auto;
+  background:linear-gradient(to right,transparent,#ffcad4,transparent);
+}
+
+/* ===== GALERÍA COLLAGE ===== */
+.gallery{
+  column-count:3;
+  column-gap:20px;
+}
+
+.gallery img,
+.gallery video{
+  display:block;
+  max-width:100%;
+  width:auto;
+  height:auto;
+  max-height:420px;
+  margin:0 auto 20px;
+  border-radius:15px;
+  break-inside:avoid;
+  cursor:pointer;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.gallery video{max-height:320px;}
+
+.gallery img.featured{
+  max-height:600px;
+  box-shadow:0 20px 45px rgba(255,105,180,.35);
+}
+
+.gallery img:hover,
+.gallery video:hover{
+  transform:scale(1.04);
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+
+@media(max-width:900px){.gallery{column-count:2;}}
+@media(max-width:500px){.gallery{column-count:1;}}
+
+/* ===== COLLAGE FINAL ===== */
+.collage-final-layout{
+  max-width:900px;             
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  align-items:center;
+  gap:40px;
+}
+
+.collage-final{
+  width:100%;
+  max-width:360px;
+  height:auto;
+  object-fit:contain;
+  border-radius:20px;
+  justify-self:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.collage-final-layout p{
+  text-align:left;
+  font-size:1.25em;
+  line-height:1.8;
+  margin:0;
+}
+
+@media(max-width:768px){
+  .collage-final-layout{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .collage-final-layout p{
+    text-align:center;
+    margin-top:20px;
+  }
+}
+
+iframe{
+  width:100%;
+  height:400px;
+  border-radius:20px;
+}
+
+
+/* ===== CONTADOR DE ANIVERSARIO ===== */
+.countdown-wrap{
+  max-width:820px;
+  margin:0 auto;
+  text-align:center;
+}
+.countdown-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.18);
+  font-size:.95rem;
+  letter-spacing:.04em;
+}
+.countdown-date{
+  margin:18px 0 8px;
+  font-size:clamp(1.1rem,2vw,1.35rem);
+  opacity:.92;
+}
+.countdown-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(100px,1fr));
+  gap:16px;
+  margin:30px auto 20px;
+}
+.countdown-card{
+  padding:24px 12px 20px;
+  border-radius:22px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 12px 30px rgba(0,0,0,.18);
+}
+.countdown-number{
+  display:block;
+  font-size:clamp(2.2rem,6vw,4.4rem);
+  line-height:1;
+  font-weight:700;
+  color:#ffd8e2;
+  font-variant-numeric:tabular-nums;
+}
+.countdown-label{
+  display:block;
+  margin-top:10px;
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  opacity:.8;
+}
+.anniversary-message{
+  max-width:720px;
+  margin:24px auto 0;
+  font-size:1.15rem;
+  line-height:1.8;
+}
+.anniversary-badge{
+  display:none;
+  margin:24px auto 0;
+  width:max-content;
+  max-width:100%;
+  padding:14px 22px;
+  border-radius:999px;
+  background:linear-gradient(135deg,rgba(255,117,140,.9),rgba(255,126,179,.9));
+  box-shadow:0 14px 34px rgba(255,117,140,.28);
+  font-weight:700;
+}
+@media(max-width:650px){
+  section{padding:55px 14px;}
+  .box{padding:32px 20px;}
+  h1{font-size:2.35em;}
+  h2{font-size:1.8em;}
+  .countdown-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.lightbox img,
+.lightbox video{
+  max-width:90vw;
+  max-height:90vh;
+  border-radius:20px;
+}
+
+/* CORAZONES */
+.heart{
+  position:fixed;
+  top:-10px;
+  color:#ffb3c6;
+  font-size:20px;
+  animation:fall linear infinite;
+  z-index:0;
+}
+@keyframes fall{to{transform:translateY(110vh)}}
+
+/* MUSICA */
+.music-btn{
+  position:fixed;
+  bottom:30px;right:30px;
+  padding:15px 25px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(to right,#ff758c,#ff7eb3);
+  color:#fff;
+  cursor:pointer;
+  z-index:1000;
+}
+.playlist{
+  position:fixed;
+  bottom:90px;right:30px;
+  width:260px;
+  background:rgba(0,0,0,.85);
+  border-radius:20px;
+  padding:15px;
+  display:none;
+  z-index:999;
+}
+.playlist h3{text-align:center;color:#ffcad4;}
+#songTitle{text-align:center;font-size:.9em;opacity:.8}
+.controls{display:flex;justify-content:space-around;margin:10px 0}
+.controls button{
+  border:none;
+  border-radius:50%;
+  padding:10px 14px;
+  cursor:pointer;
+  background:linear-gradient(to right,#ff758c,#ff7eb3);
+  color:#fff;
+}
+.playlist ul{list-style:none;padding:0;margin:0}
+.playlist li{padding:8px;border-radius:10px;cursor:pointer}
+.playlist li:hover{background:rgba(255,255,255,.15)}
+
+footer{text-align:center;padding:40px;opacity:.85;}
+</style>
+</head>
+
+<body class="dark">
+
+<div class="theme-picker">
+  <button onclick="setTheme('dark')">🌙</button>
+  <button onclick="setTheme('light')">☀️</button>
+  <button onclick="setTheme('romantic')">💖</button>
+</div>
+
+<section>
+  <div class="box">
+    <h1>Un Año de Nosotros ❤️</h1>
+    <h2>29 de septiembre de 2025 → 29 de septiembre de 2026</h2>
+    <div class="divider"></div>
+    <p>Hace un año comenzó una historia que, sin darse cuenta, se fue llenando de mensajes, risas, recuerdos y momentos que hoy significan muchísimo. Esta página guarda un pedacito de todo eso: de lo que han vivido, de lo que sienten y de todo lo bonito que todavía les falta por compartir.</p>
+    <p>Que este primer año sea apenas el comienzo de muchos más. Que nunca les falten motivos para elegirse, paciencia para cuidarse y ganas de seguir creando recuerdos juntos. 💖</p>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Nuestra Historia en Recuerdos 📸</h2>
+    <p>Cada foto guarda algo que quizá en el momento parecía pequeño, pero que con el tiempo se volvió especial: una sonrisa, una conversación, un día bonito o simplemente la suerte de coincidir. Este collage es una forma de mirar atrás y recordar todo lo que construyeron durante este primer año.</p>
+    <div class="divider"></div>
+    <div class="gallery">
+      <img src="fotos/foto1.jpeg" class="featured" onclick="openLightbox(this.src)">
+      <img src="fotos/foto2.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto3.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto4.jpeg" class="featured" onclick="openLightbox(this.src)">
+      <img src="fotos/foto5.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto6.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto7.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto8.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto9.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto10.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto11.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto12.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto13.jpeg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto14.jpg" onclick="openLightbox(this.src)">
+      <img src="fotos/foto15.jpg" onclick="openLightbox(this.src)">
+    </div>
+  </div>
+</section>
+
+<section id="aniversario">
+  <div class="box">
+    <div class="countdown-wrap">
+      <span class="countdown-kicker">💞 Nuestro primer aniversario</span>
+      <h2 id="countdownTitle">Falta muy poquito para nuestro día</h2>
+      <p class="countdown-date">29 de septiembre de 2026 · 12:00 a. m.</p>
+      <div class="divider"></div>
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="countdown-card"><span class="countdown-number" id="days">00</span><span class="countdown-label">Días</span></div>
+        <div class="countdown-card"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Horas</span></div>
+        <div class="countdown-card"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutos</span></div>
+        <div class="countdown-card"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Segundos</span></div>
+      </div>
+      <div class="anniversary-badge" id="anniversaryBadge">🎉 ¡Feliz primer aniversario! 365 días eligiéndose ❤️</div>
+      <p class="anniversary-message" id="anniversaryText">No se trata solo de contar los días, sino de recordar todo lo que cabe dentro de ellos. Cada minuto que falta los acerca a celebrar un año de una historia que merece seguir creciendo.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Lo Bonito de Elegirse ✨</h2>
+    <div class="divider"></div>
+    <div class="collage-final-layout">
+      <img src="fotos/foto16.png" class="collage-final" onclick="openLightbox(this.src)">
+      <p>Hay personas que llegan a la vida y, poco a poco, se convierten en hogar. Tú eres una de esas personas. Tu sonrisa, tu forma de ser, tus detalles y hasta esas pequeñas cosas que quizá tú no notas hacen que compartir este camino contigo sea especial.
+
+Este primer año no solo se mide en días. Se mide en conversaciones que hicieron más liviano un momento difícil, en risas inesperadas, en planes, en recuerdos y en la tranquilidad de saber que, incluso con distancia o días complicados, siguen encontrando la manera de estar el uno para el otro.
+
+Ojalá nunca pierdan esa capacidad de cuidarse, escucharse, admirarse y volver a elegirse. Que lo que hoy celebran sea apenas la primera página de una historia mucho más larga, llena de abrazos pendientes, metas compartidas y momentos que un día mirarán atrás con una sonrisa.
+
+Feliz primer año. Que sigan sumando días, pero sobre todo, razones bonitas para quedarse. ❤️</p>
+    </div>
+  </div>
+</section>
+
+<footer>Un año de recuerdos, y toda una historia por delante. 💖</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div id="lightbox-content"></div>
+</div>
+
+<audio id="music"></audio>
+<button class="music-btn" onclick="togglePlaylist()">🎵 Música</button>
+
+<div class="playlist" id="playlist">
+  <h3>Nuestra Playlist</h3>
+  <p id="songTitle">Selecciona una canción</p>
+  <div class="controls">
+    <button onclick="prevSong()">⏮</button>
+    <button onclick="togglePlay()" id="playBtn">▶</button>
+    <button onclick="nextSong()">⏭</button>
+  </div>
+  <ul>
+    <li onclick="selectSong(0)">❤️ congratulations</li>
+    <li onclick="selectSong(1)">✨ Reina Pepiada</li>
+    <li onclick="selectSong(2)">🌹Te Quiero Amor</li>
+    <li onclick="selectSong(3)">👑 True Love</li>
+  </ul>
+</div>
+
+<script>
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  h.style.animationDuration=(3+Math.random()*5)+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},600);
+
+function openLightbox(el){
+  const box=document.getElementById('lightbox');
+  const content=document.getElementById('lightbox-content');
+  content.innerHTML='';
+  if(typeof el==='string'){
+    const img=document.createElement('img');
+    img.src=el;
+    content.appendChild(img);
+  }else{
+    const v=document.createElement('video');
+    v.src=el.src;
+    v.controls=true;
+    v.autoplay=true;
+    content.appendChild(v);
+  }
+  box.style.display='flex';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').style.display='none';
+  document.getElementById('lightbox-content').innerHTML='';
+}
+
+const music=document.getElementById('music');
+const songs=[
+ {t:'Congratulations',f:'Music/congratulations.mp3'},
+ {t:'Reina Pepiada',f:'Music/Reina_pepiada.mp3'},
+ {t:'Te Quiero Amor',f:'Music/tequieroamor.mp3'},
+ {t:'True Love',f:'Music/true_love.mp3'}
+];
+let current=0,playing=false;
+function togglePlaylist(){
+  const p=document.getElementById('playlist');
+  p.style.display=p.style.display==='block'?'none':'block';
+}
+function selectSong(i){
+  current=i;
+  music.src=songs[i].f;
+  music.play();
+  playing=true;
+  document.getElementById('songTitle').innerText=songs[i].t;
+  document.getElementById('playBtn').innerText='⏸';
+}
+function togglePlay(){
+  if(!music.src)return;
+  playing?music.pause():music.play();
+  playing=!playing;
+  document.getElementById('playBtn').innerText=playing?'⏸':'▶';
+}
+function nextSong(){current=(current+1)%songs.length;selectSong(current)}
+function prevSong(){current=(current-1+songs.length)%songs.length;selectSong(current)}
+music.onended=nextSong;
+
+
+const anniversaryDate = new Date('2026-09-29T00:00:00-05:00');
+const relationshipStart = new Date('2025-09-29T00:00:00-05:00');
+
+function pad2(n){ return String(n).padStart(2,'0'); }
+
+function updateAnniversaryCountdown(){
+  const now = new Date();
+  const diff = anniversaryDate - now;
+  const title = document.getElementById('countdownTitle');
+  const badge = document.getElementById('anniversaryBadge');
+  const text = document.getElementById('anniversaryText');
+
+  if(diff > 0){
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    document.getElementById('days').textContent = pad2(days);
+    document.getElementById('hours').textContent = pad2(hours);
+    document.getElementById('minutes').textContent = pad2(minutes);
+    document.getElementById('seconds').textContent = pad2(seconds);
+    return;
+  }
+
+  const elapsed = now - relationshipStart;
+  const totalDays = Math.floor(elapsed / 86400000);
+  document.getElementById('days').textContent = totalDays;
+  document.getElementById('hours').textContent = pad2(now.getHours());
+  document.getElementById('minutes').textContent = pad2(now.getMinutes());
+  document.getElementById('seconds').textContent = pad2(now.getSeconds());
+  document.querySelectorAll('.countdown-label')[0].textContent = 'Días juntos';
+  title.textContent = 'Y ahora… a seguir contando juntos ❤️';
+  badge.style.display = 'block';
+  text.textContent = 'Ya llegó su día. Hoy no termina el contador: cambia de sentido. Desde aquí empieza a sumar todos los días nuevos que todavía les quedan por vivir, recordar y celebrar juntos.';
+}
+
+updateAnniversaryCountdown();
+setInterval(updateAnniversaryCountdown,1000);
+
+function setTheme(t){document.body.className=t}
+</script>
+
+</body>
+</html>
